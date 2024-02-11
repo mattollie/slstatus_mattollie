@@ -23,7 +23,7 @@ static const char unknown_str[] = "n/a";
  * datetime            date and time                   format string (%F %T)
  * disk_free           free disk space in GB           mountpoint path (/)
  * disk_perc           disk usage in percent           mountpoint path (/)
- * disk_total          total disk space in GB          mountpoint path (/")
+ * disk_total          total disk space in GB          mountpoint path (/)
  * disk_used           used disk space in GB           mountpoint path (/)
  * entropy             available entropy               NULL
  * gid                 GID of current user             NULL
@@ -63,11 +63,10 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 	/* function format          argument */
-	//{ datetime, "%s",           "%F %T" },
-	//{ wifi_perc, "W: (%3s%% on ", "wlp8s0" },
-    //{ netspeed_rx, "%sB/s  ", "enp0s3" },
-	{ run_command, ": %4s | ", "amixer sget Master | awk -F\"[][]\" '/%/ { print $2 }' | head -n1" },
-	{ cpu_perc, "[CPU  %s%%]   ", NULL	      },
-	{ ram_perc, "[RAM  %s%%]   ", NULL	      },
-	{ datetime, "%s",           "%a %b %d %r" },
+	{ cpu_perc,		"[CPU: %s%%] ",	NULL },
+	{ run_command,		"%s | ",	"amixer sget Master |tail -n | awk '{print $5}'" },
+	{ ram_used,		"[RAM: %s",		NULL },
+	{ ram_perc,		"(%s%%)] ",	NULL },
+	{ netspeed_rx,		"[%sB/s] ",	"enp0s3"},
+	{ datetime,		" %s",		"%a %F %T" },
 };
